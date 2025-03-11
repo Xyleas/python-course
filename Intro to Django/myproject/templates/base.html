@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Portfolio</title>
+    </head>
+    <body>
+        <header>
+            {%if request.user.is_authenticated%}
+            <span>
+                Hi {{request.user.username}}
+            </span>
+            <a href = "{%url 'logout' %}">Logout</a>
+            {%else%}
+            <a href = "{%url 'login' %}">Login</a>
+            {%endif%}
+        </header>
+        {% block content %}
+        {% end block content%}
+    </body>
+</html>
