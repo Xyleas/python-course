@@ -1,8 +1,8 @@
-import google.generativeai as genai
+import google as genai
 from openpyxl import Workbook
 from pptx import Presentation
 
-def generate(api_key, project_charter)
+def generate(api_key, project_charter):
     genai.configure(api_key=api_key)
 
     # Create the model
