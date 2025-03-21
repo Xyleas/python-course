@@ -30,7 +30,7 @@ class MyApp:
         # Create a Button
         button = Button(root, text="Button text", command=press_button)
         # button.pack(side=tk.LEFT)
-        button.grid(column=1, row=2)
+        button.grid(column=1, row=2, sticky=(S, E))
 
         # Create Listbox
         self.list_item_strings = ["Hey", "Hi", "Hello", "Howdy", "Greetings"]
