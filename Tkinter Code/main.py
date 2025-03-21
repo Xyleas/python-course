@@ -11,6 +11,7 @@ class MyApp:
         label = Label(root, text="Some label text")
         label.pack()
 
+        label[""]
 
 root = TK()
 MyApp(root)
