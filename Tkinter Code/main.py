@@ -18,6 +18,7 @@ class ToDoListApp:
         root.columnconfigure(1, weight=1)
         root.rowconfigure(1, weight=1)
 
+        # To Do Item List
         list_label = Label(frame, text="To Do Items")
         list_label.grid(column=1, row=1, sticky=(S,W))
 
@@ -26,51 +27,54 @@ class ToDoListApp:
             ToDoItem("House work", "Clean kitchen, sweep floors, do laundry"),
             ToDoItem("Groceries", "Buy bread, milk, eggs")
         ]
+
         self.to_do_names = StringVar(value=list(map(lambda x: x.name, self.to_do_items)))
         items_list = Listbox(frame, listvariable=self.to_do_names)
-        items_list.bind("<<ListboxSelect>>", lambda s: self.select_item(listbox.curselection()))
-        items_list.grid(column=1, row=2, sticky= (E, W))
+        items_list.bind("<<ListboxSelect>>", lambda s: self.select_item(items_list.curselection()))
+        items_list.grid(column=1, row=2, sticky= (E, W), rowspan = 5)
 
         self.selected_description = StringVar()
-        selected_description_label = Label(frame, textvariable=self.selected_description )
-        selected_description_label.grid(column=1, row=3, sticky= (E, W))
+        selected_description_label = Label(frame, textvariable=self.selected_description, wraplength=200)
+        selected_description_label.grid(column=1, row=7, sticky= (E, W))
 
-        self.label_text = StringVar()
-        label = Label(frame, text="Some label text", textvariable=self.label_text)
-        # label.pack(side=tk.LEFT, padx=40, pady=20)
-        # label.grid(column=1, row=1)
-        # label["text"] = "New label text"
-        # label["font"] = ("Courier", 40)
+        # New Item
+        new_item_label = Label(frame, text = "New Item")
+        new_item_label.grid(column=2, row=1, sticky=(S,W))
 
-        label.configure(text = "New label text", font = ("Courier", 40))
+        name_label = Entry(frame, textvariable="Item name")
+        name_label.grid(column=2, row=2, sticky=(S, W))
 
-        # entry_text = StringVar()
-        self.entry_text = StringVar()
-        entry = Entry(frame, textvariable=self.entry_text)
-        # entry.pack(side=tk.LEFT) # Is placed below the label
-        # entry.place(x=100, y=50)
-        # entry.grid(column = 2, row=1)
+        self.name = StringVar()
+        name_entry = Entry(frame, textvariable=self.name)
+        name_entry.grid(column=2, row=3, sticky=(N, E, W))
 
-        # label["textvariable"] = entry_text
+        description_label = Label(frame, text = "Item description")
+        description_label.grid(column=2, row=4, sticky=(S,W))
+
+        self.name = StringVar()
+        description_entry = Entry(frame, textvariable=self.description)
+        description_entry.grid(column=2, row=5, sticky=(N, E, W))
 
         # Create a Button
-        button = Button(frame, text="Button text", command=press_button)
-        # button.place(x=0,y=0)
-        # button.configure(width=10,height=1, font=(Courier, 40))
-        # button.pack(side=tk.LEFT)
-        # button.grid(column=1, row=2, sticky=(S, E, W))
-
+        save_button = Button(frame, text="Save", command=self.save_item)
+        save_button.grid(column=2, row=6, sticky=(E))
         
-    def press_button(self):
-        text = self.entry_text.get()
-        self.label_text.set(text)
-        listbox.insert(END, text)
+        for child in frame.winfo_children:
+            child.grid_configure(padx=10, pady=5)
+
+        root.grid_columnconfigure(1, weight=1)
+        root.grid_rowconfigure(1, weight=1)
+
+    def save_item(self):
+        name = self.name.get()
+        description = self.description.get()
+        new_item = ToDoItem(name, description)
+        self.to_do_items.append(new_item)
+        self.to_do_names.set(list(map(lambda x: x.name, self.to_do_items)))
 
     def select_item(self, index):
-        # selected_item = self.to_do_names[index[0]]
-        # print(selected_item)
-
-
+        selected_item = self.to_do_names[index[0]]
+        self.selected_description.set(selected_item_object.description)
 
 root = TK()
 ToDoListApp(root)
