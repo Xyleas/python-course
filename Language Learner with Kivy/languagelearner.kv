@@ -1,10 +1,57 @@
 #:kivy 1.11.1
 
 <GameScreen>:
-
-    FloatLayout:
+    canvas:
+        Color:
+            rgba: 1,1,1,1
+        Rectangle:
+            pos: root.x, root.y
+            size: root.width, root.height
+    FLoatLayout:
         pos: 0,0
         size: root.width, root.height
 
         Label:
-            text: 'Here is some text in a label'
+            pos_hint: {'x' : .1, 'y' : .9}
+            size_hint: .8, .1
+            text_size: self.size
+            text: 'diamante'
+            font_size: 60
+            bold: True
+            color: 0,0,0,1
+
+        GridLayout:
+            pos_hint: {'x': .1,'y': .25}
+            size_hint: None, None
+            size: root.width * .8, root.width * .8
+            cols: 2
+
+            ImageBox:
+            ImageBox:
+            ImageBox:
+            ImageBox:
+        
+        ProgressBar:
+            pos_hint: {'x' : .1, 'y': .1}
+            size_hint: .8, .1
+<ImageBox>:
+
+    Button:
+        pos: root.x, root.y
+        size: root.width, root.height
+    Image:
+        source: 'images/diamante.png'
+        pos: root.x, root.y
+        size: root.width, root.height
+
+<ProgressBar>:
+    canvas:
+        Color:
+            rgba: 0,0.5,0.2,1
+        Rectangle:
+            pos: self.x, self.y
+            size: self.width/2, self.height
+        BorderImage:
+            pos: self.width-40, self.y + 20
+            size: self.height - 40, self.height - 40
+            source: 'images/trophy.png'
