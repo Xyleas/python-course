@@ -75,7 +75,7 @@
         pos: root.x + 5, root.y + 5
         size: root.width - 10, root.height - 10
         background_normal: str(False)
-        on_press: self.parent.parent.parent.parent.show_end_game_popup()
+        on_press: self.parent.parent.parent.parent.make_selection(self.parent.index)
     Image:
         source: self.parent.image_name
         pos: root.x + 5, root.y + 5
@@ -84,10 +84,22 @@
 <ProgressBar>:
     canvas:
         Color:
-            rgba: 0,0.5,0.2,1
+            rgba: 0,0,0,1
         Rectangle:
             pos: self.x, self.y
-            size: self.width/2, self.height
+            size: self.width, self.height
+        Color:
+            rgba: 1,1,1,1
+        Rectangle:
+            pos: self.x + 5, self.y + 5
+            size: self.width - 10, self.height - 10
+        Color:
+            rgba: 0,0.5,0.2,1
+        Rectangle:
+            pos: self.x + 5, self.y + 5
+            size: self.parent.parent.bar_width, self.height - 10
+        Color:
+            rgba: 1,1,1,1
         BorderImage:
             pos: self.width-40, self.y + 20
             size: self.height - 40, self.height - 40
@@ -123,7 +135,7 @@
             text_size: self.size
             halign: 'left'
             font_size: 30
-            text: 'Your score: 10' 
+            text: 'Your score: ' + str(self.parent.parent.final_score) 
         Label:
             pos_hint: {'x' : .1, 'y' : .4}
             size_hint: .8, .1
@@ -132,7 +144,7 @@
             text_size: self.size
             halign: 'left'
             font_size: 30
-            text: 'High score: 12'
+            text: 'High score: ' + str(self.parent.parent.high_score)  
         Button:
             pos_hint: {'x' : .1, 'y' : .1}
             size_hint: .8, .15
