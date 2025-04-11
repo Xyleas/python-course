@@ -33,3 +33,20 @@ for record in records:
     ]
     records_data.append(record_data)
 print(records_data)
+
+filename = 'Storm Tide Data.csv'
+f = open(filename, 'w')
+
+headers = 'Site, DateTime, Water Level, Prediction, Residual\n'
+f.write(headers)
+
+for record in records:
+    row_string = ''
+    row_string += record['Site'] + ','
+    row_string += record['DateTime'] + ','
+    row_string += str(record['Water Level']) + ','
+    row_string += str(record['Prediction']) + ','
+    row_string += str(record['Residual']) + '\n'
+    f.write(row_string)
+
+f.close()
