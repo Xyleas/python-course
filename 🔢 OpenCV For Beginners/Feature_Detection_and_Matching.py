@@ -31,7 +31,8 @@ def feature_detection_and_matching(image1_path, image2_path):
     good_matches = []
     for m, n in matches:
         if m.distance < 0.75 * n.distance:
-            good_matches.append(m)
+            # Wrap into a list
+            good_matches.append([m])
 
     # Draw matches
     matched_image = cv2.drawMatchesKnn(image1, keypoints1, image2, keypoints2, good_matches, None, flags=2)
