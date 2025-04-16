@@ -14,4 +14,4 @@ if response.status_code == 201:
     print("Data deleted successfully")
     # print(response.json())
 else:
-    print(f"Failed to deleted data.")
+    print(f"Failed to delete data.")
