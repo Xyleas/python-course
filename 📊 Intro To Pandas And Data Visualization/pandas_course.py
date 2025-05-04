@@ -139,3 +139,88 @@ merged_df = pd.merge(df, sports_df, on='Student ID') # Defaults to Inner Join On
 
 print(merged_df)
 
+merge_outer = pd.merge(df, sports_df, on='Student ID', how = 'outer')
+print(merge_outer) # When there is no data, it will add 'NaN'or empty data.
+
+data_new = {
+    'School': ['A', 'B', 'A', 'B'],
+    'Student ID': [1009, 1010, 1011, 1012],
+    'Math': np.random.randint(60, 100, 4),
+    'English': np.random.randint(60, 100, 4),
+    'History': np.random.randint(60, 100, 4),
+    'Class': ['X', 'Y', 'Y', 'X']
+}
+
+df_new = pd.DataFrame(data_new)
+
+concatenated_df = pd.concat([df, df_new], ignore_index = True)
+print(concatenated_df)
+
+date_rng = pd.date_range(start='2023-01-01', end='2023-12-31', freq='D')
+stock_data = 100 + np.cumsum(np.random.randn(365) * 2)
+
+df = pd.DataFrame(stock_data, index=date_rng, column=['Price'])
+
+print(df.head())
+
+monthly_avg = df.resample('M').mean()
+print(monthly_avg)
+
+df_shifted = df.shift(1)
+print(df_shifted.head())
+
+df['Price Next Day'] = df['Price'].shift(1)
+df['Day-to-day-change'] = df['Price'] - df['Price Next Day']
+
+print(df.head(10))
+
+df_rolling = df.rolling(window=7).mean()
+print(df_rolling.head(10))
+
+import matplotlib.pyplot as pyplot
+
+grades_data = {
+    'Subjects': ['Math', 'English', 'History', 'Biology', 'Physics'],
+    'Average_Grade': [85, 90, 78, 92, 88]
+}
+
+grade_df = pd.DataFrame(grades_data)
+
+grade_df.plot(kind = bar, x='Subjects', y='Average_Grade', title='Average Grades for Subjects')
+plt.ylabel('Average Grade')
+plt.tight_layout()
+plt.show()
+
+df.plot(title='Stick Price Over Time')
+plt.xlabel('Date')
+plt.ylabel('Price')
+plt.tight_layout()
+plt.show()
+
+# Histogram
+df['Price'].diff().plot(kind='hist', title='Distrobution of Price Changes', bins=20)
+plt.xlabel('Price Change')
+plt.tight_layout()
+plt.show()
+
+data = {
+    'A': np.random.randn(100),
+    'B': np.random.randn(100)
+}
+
+scatter_df = pd.DataFrame(data)
+
+scatter_df.plot(kind = 'scatter', x='A', y='B')
+plt.xlabel('Value of A')
+plt.ylabel('Value of B')
+plt.tight_layout()
+plt.show()
+
+data['A'] = np.random.randn(100)
+data['B'] = data['A'] * 2 + np.random.randn(100) * 0.5
+
+scatter_df_corr = pd.DataFrame(data)
+
+scatter_df_corr.plot(kind='scatter', x='A', y='B')
+plt.tight_layout()
+plt.show() # An imaginary trend line can be drawn.
