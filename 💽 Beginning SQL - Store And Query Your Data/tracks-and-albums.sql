@@ -1,0 +1,1 @@
+SELECT TrackId, Name, Title FROM Track INNER JOIN Track ON Album.ArtistId = Artist.ArtistId;
