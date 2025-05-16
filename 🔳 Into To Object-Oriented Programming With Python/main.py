@@ -287,4 +287,4 @@ print(game_object.name) # Game object
 print(enemy.name) # Enemy
 
 enemy.take_damage(20)
-print(enemy.health) # 80
+print(enemy.health) # 80🎉
